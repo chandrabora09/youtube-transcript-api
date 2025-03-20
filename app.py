@@ -33,13 +33,15 @@ def get_transcript():
         transcript = openai.Audio.transcribe("whisper-1", audio)
         audio.close()
 
-        os.remove(audio_file)  # Cleanup the audio file
+        os.remove(audio_file)
 
         return jsonify({"transcript": transcript["text"][:3500]})
-    except Exception as e:
-        print("Detailed error:", str(e))
-        return jsonify({"error": f"Auto-transcription failed: {str(e)}"}), 400
 
+    except Exception as e:
+        print("Full Exception Details:", e)
+        if hasattr(e, 'response'):
+        print("OpenAI response:", e.response.text)
+        return jsonify({"error": f"Auto-transcription failed: {str(e)}"}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
