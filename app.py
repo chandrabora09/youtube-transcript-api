@@ -37,7 +37,9 @@ def get_transcript():
 
         return jsonify({"transcript": transcript["text"][:3500]})
     except Exception as e:
-        return jsonify({"error": f"Auto-transcription failed: {str(e)}"}), 400
+    print("Detailed error:", str(e))
+    return jsonify({"error": f"Auto-transcription failed: {str(e)}"}), 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)
