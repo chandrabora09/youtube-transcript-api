@@ -39,8 +39,8 @@ def get_transcript():
 
     except Exception as e:
         print("Full Exception Details:", e)
-            if hasattr(e, 'response'):
-                print("OpenAI response:", e.response.text)
+        if hasattr(e, 'response'):
+            print("OpenAI response:", e.response.text)
         return jsonify({"error": f"Auto-transcription failed: {str(e)}"}), 400
 
 if __name__ == '__main__':
